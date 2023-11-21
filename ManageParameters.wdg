@@ -1,0 +1,80 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : ManageParameters
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x12cd91410452f313
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  internal_properties : CAAAAAgAAABxlxYTgKJ40VVC2ih3pWKnfZbVHUt1hrlcxs3SEVQneopJCdufYEdfQKtCnspK7yf75/3kvxgot5nJhwD/xI1qOIQrXGucUORcbp+luk0B3vGc6sYeR8lB8LKeSnmxhKIlHtI=
+  type_code : 31
+  p_codes :
+   -
+     code : |1-
+      
+      CONSTANT
+      	// Name of the section where the parameters are stored
+      	cstSectionParameters = "Global"
+      END
+     type : 720896
+  procedures :
+   -
+     name : LoadParameter
+     internal_properties : CAAAAAgAAAD4TQAAlCJTW+XeuCYSW6qYPO5u6ojfQcrMFuGUasxx/WZ6VSY6rOI+4N9h+NK2WFAYIiXELm+nXdn3wDKSk2lZejVPlBazJb/SJroe0OaZ+pTeUYAHs1VC4+vRUt6dOL+ls4dsHLBUzEfDCn2nCWOODnOQu+WasvpQeR6EnhA7wx4tN7M4cYn2Jy8alCTvVuoCsPsoHbAeDJYCWKkg8BxadV8qCLr/jbBPMRKrd6oV9b1GcfOpetKotoG0X21WGZtcaI5Cp8bzWpG2ndhWT4cDFGBvzQKx1K0ytraR0ClPtPAjiBhPlq+0+FVUp82HKyrDuK1g2SZfFE1btPZcxuv2pQCTki86I3yrRBX4/4JE6u/Y+wePTrqrmAgyLremx5jFAPgpwukjGjA=
+     procedure_id : 1354898771339899667
+     type_code : 15
+     code : |1+
+      // Summary: Loads a parameter
+      // Syntax:
+      //[ <Result> = ] LoadParameter (<sParameterName>, <sDefaultValue>)
+      //
+      // Parameters:
+      //	sParameterName: Name of the parameter
+      //	sDefaultValue: Default value
+      // Return value:
+      // 	variant: Value of the parameter
+      //
+      
+      Procedure LoadParameter(sParameterName, sDefaultValue)
+      
+      // Reads the value in the .INI file
+      RESULT INIRead(cstSectionParameters, sParameterName, sDefaultValue, gsConfigFile)
+     type : 458752
+   -
+     name : SaveParameter
+     internal_properties : CAAAAAgAAABuP5a2Kv67oyUy8IqKawCjpuYsQAK3s6bTSrkIKlD5ca5CQQL6+LpusENpdFIy2Fx4krm4PtsPfLk7pqazEEjaB9nP8PxUCIfPMigcADOhzX0FWm+HDPOmVPsNq6NT7ZSsGrtTl0h6gsDDcmC7y2EGppWQ6+FgOqBYorZ1lx8HDIrRQz+EvU3io5vmsJBr6l5GxK/oOVSKSAK+9CWkTEhmQaMm/IYrIfybDv8BmArv+k4lkEZUEVvDl4QnriDEf+nHc12Zva9ulHj07O2QYp6yoKbxBtMhsxvfkHbGzSTUHTrXM7ARkK1Gg4FlJWBirLNg8m8CW1zZkvN91uCGnFFQE9r1xCm4VXJ53i/y8ZBKZEyHKu7GHUOymShQ+HmUxdqL4trbHFeVjKY=
+     procedure_id : 1354898771339965203
+     type_code : 15
+     code : |1+
+      // Summmary: Stores the value of a parameter
+      // Syntax:
+      //SaveParameter (<sParameterName>, <sValue>)
+      //
+      // Parameters:
+      //	sParameterName: Name of the parameter
+      //	sValue: Value to store
+      // Return value:
+      // 	None
+      //
+      
+      PROCEDURE SaveParameter(sParameterName,sValue)
+      
+      // Writes the value into the .INI file
+      INIWrite(cstSectionParameters, sParameterName, sValue, gsConfigFile)
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x1d5e7a52024189be
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

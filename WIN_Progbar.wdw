@@ -1,0 +1,91 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : WIN_Progbar
+ major_version : 28
+ minor_version : 0
+ type : 2
+ description : ""
+ subtype : 0
+window :
+ name : WIN_Progbar
+ identifier : 0x22cd9140226ded58
+ internal_properties : CAAAAAgAAABVjwVFYX0+B51NrYyHJ5+8mLm1J3oJKwPwMjMFC5RXnCWqYvwpWzSg0kBf10UrOg89r5fkPltV+gZLZLCtM+72k3jxc928y4fkniNOYuRBbDKwUfXRVLiIhPe/ChiwAuzZoPcS17sPVu3JZ7xWiW7lM0y/WyXoNioAM7CUcf9wDz6t9X74g3pJgtBKnlx5Gl3HZoomcKjtQXHu3HydhsXWIpRoD8o9BSdboKvy0etQFPdEiS0ZN870tRl0P7qAHPCFnutkNEu4fAv0muWvrB1V9Sdbp+QkycXH+mLRN69nrHnHWzYx0FmgxXJEnnhImoCj5dZ9gYsEcL8RMUSHtx8ws4hg7YYhtS6repfRLyJwuVqPpttkXXFumoXaaNSJ9Be9b+cROr9tQJpg8+VbK1MKTj1j7oI5TVVj8tMX0BhpVBaOggTyGdIykMipEEElBBE9jcvC7FW46EX4IdNg78HAgyQ3dry41+Rp6Te34RICo2/E7WI6T2RzKTXcQaVW/yBjSvm1Xev85OdOiq4wXi3QiUtutIGW2BiwYLia5/K5OeXGAZUdbG5LZFJ9Vs7BtmtV6o9qgJEpvovPL1rV+pct3vEsfD/Ny7u5qp93tecYL4G5k2TPJvY2Fd+hr//D5wkxjBv/KFGAnhsz5m6AICdUmUrDG+aGCS3yEpoGlywc5T0W6dPcEy767TOIBokM2wvnSAmPmcLQCkccBX1Lbrn+mtOVpdkPYkmMzC19xk4CvArIeX7tVSOKLl3cii4=
+ properties :
+  width : 348
+  height : 72
+  widthClient : 346
+  heightClient : 70
+ controls :
+  -
+    name : PROGBAR_SendEmail
+    identifier : 0x22cd9140226eed58
+    internal_properties : CAAAAAgAAACZx3fsaTD8ja77MBRSPCwA7SFYAqP/XaLcX10gn/8H6H6ZqD7tbU+icNcn7EBx9ygclxcFyCE6k28gTCcM/CT6cWDx5zgEj2wd/UYWbOLPnOc7eGZLjXV3xsJpluEb1pHx167anviihNjsetaAoLL1W/ljGZd6TO+LNthNn9zsvy3bhequVOJKTdizWU23Oh5UazHMg0vPTIdfsDDtGGLC2b+X13WMYT8TnoZA84kFVEilFNpi3Dw+l7Nw8z5jweHoPcccWk/q15vDCFDDJTmuPOvJ3ZQKWYKyW/5AEK5qBCBsFBGnmlHrz2+t7epr/vgCh/TCcL4W1EpYZK8bnPR4N8NsrWr7MWSO+vBq8ACKC3i/37BtNzG4byolw8AIVMBzND6ksqQ3nPIl0y8rahLXCEOIs1JCDLy5AMiy0UteAuOaZ42l+/UWxfYvVE8PxUKAcGbpNCbYvnnCaMBIGTWOR59i6aT4bRDvhmRq9COAucpthE1ho4bHrI4FTROOrPhYU7vvAXoxxoelYRBlWWfBzIgoOY8FcX7O5m1S+hn889VrlOc6lmdjmnuQItY+WNTTdke6TZPUy7LqcBe6lnOxYp6X8O7r0Pulyc/szs7csKFce4wYWgI2BXh8MjAfTHLwo62Atj/1EJgB+rzKKpL+IAjrlJbelTlmWEvPEuHzxhJNz9cvRIFMKMombXNB3/3uHdal5Ej6W+64HWh8KQe1lDDFhLLTY9b8cdEInv7xtjnSkn5fz9Qc121l9v61/9efONzvVbAYVgPYt+8obGbYxlhbVmKsU3fxIKo5rOCePEFGnFs=
+    properties :
+     x : 6
+     y : 33
+     width : 334
+     height : 20
+    type : 10
+    code_elements :
+     type_code : 17
+     p_codes : []
+  -
+    name : STC_SendingInProgress
+    identifier : 0x22cd9140226fed58
+    internal_properties : CAAAAAgAAAB2pn0I428Euaod4P/arP/FRbo7RuFJKGoLzKfd3azW9p5/oRWXtoPmoh5vuZBGn1fEPwpYC12Iz42Wx3GubSk9MdAjcQWSJg6suS4+9oLr7imU/1efMvLS1LObhZVjSsJOIP7SXaJYCC/fRL8W4Bujlh+VQdi6PWwZrebzAt5o7e87IzR77CLD6GcK8nAVZsW8yU/bYEPhVlJ1OcI+yxbxdYmWTZ9gFMvEaztkP8sq+kHPsBq9O4XRBD0/ip3oki1u8kwkdwN4/q0DuMVLancIf0V8U9P3vbX3v6/HubDtAkyb2ESOhLx5Oj1i+ZX8Rgpg62WFDXMINUbgaU39v1BhzW/JjY2kaeyvpvh+QuclO8sy+e1OSNLMfG+CDT6lsoSqr35BPKJX0TpCR2aIuEiRB/OjhEe6kysO1nieWozBOsa/GG/ZMeyS7KPeM/vFTzN6iUDLScyxz8LRShE=
+    properties :
+     x : 6
+     y : 5
+     width : 170
+     height : 28
+    type : 3
+    code_elements :
+     type_code : 2
+     p_codes : []
+ menu :
+  name : _Menu
+  identifier : 0x2d5e78b0527d2706
+  internal_properties : CAAAAAgAAAAjoO+VYAXYh2SYpTvD7AgXCHEHRjuTd5K/qNR3zUpM1aIlQYejrbtK76/LWLozAhgdmcRuoxDXe7vi3lf8PoZYYzNtPYlgCK9AarNrSCSSPpGDp+KLIikSwO2L+lCfwFobS8WKQZu2noN9WV5ipxuLKjTaOvfojbcmu1i6FPrF8FEPa+oQBHdRyMYNLYyLF/nTGn2y7NBixG5dC7y2wsO4aXA1CKpzZUca8sBJUrSr9FqhTJMK37pOOZqMTeCIo+trbOMI1osTdzjD26auXrzETrP8OxsAt+HgvahLwDb4kRpR6lQOjBIj
+  options : []
+ languages :
+  - en-GB
+ popup_menus : []
+ message_bar :
+  internal_properties : CAAAAAgAAACZ248uvlc15onuGmIUajiC3313kH8j6HS5vIAnXFd4PvEqPQBFNUlH7hAwMKF6Xm8JEHwF6ZCYR4R5OBFhz/6XFOqbegqnLFJoBz6ghODbACHWuKRxSXcK0bTF3g==
+ actionbar : {}
+ code_elements :
+  type_code : 1
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAADWB2XZIEuq19ah4fk/6Qvb2iS0i6TMzabkHsjJj2nbmKBgd5VUnj+5zOXnWLGz5+ZSxFoSe3hNRvjo469akTx5LXXyaibsqmtf1BThqDU/RYnaKBI3UrLom3gnpdh/ISTxAefpXm44BBpJ+h+Iy+zTcryVudA9QQNmm4fEJUI=
+     code : |1-
+      //--- Popup window ---
+      // To access the popup control or combo box that opened this window
+      // you can use: MyPopupControl
+       
+   -
+     type : 180
+     enabled : false
+   -
+     type : 230
+     enabled : false
+   -
+     type : 11
+   -
+     type : 12
+   -
+     type : 17
+   -
+     type : 13
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : FEN_SansNom
+resources :
+ string_res :
+  identifier : 0x1d5e78b001512706
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAAC68/W0/adbG0nFCRhrE42B5HRnbDzVHaz86sSQyxlBk7I=
+rad :
+ internal_properties : CAAAAAgAAABoAN7PLpwJW3EiA7WVZdCA5EwrCA1rvutcDHooMWKe

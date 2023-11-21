@@ -1,0 +1,780 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : Synchronization_Outlook
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x12cd91420469f4e7
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  internal_properties : CAAAAAgAAABPOo5wfzL5PtlmH9g6pVlcqG1md+uM4GM8B/k/aVja5R6ZseBzxTGWZbo12UeE8bWym5Rl91AKrNq9wTYnFyamg2lAMw==
+  type_code : 31
+  p_codes :
+   -
+     code : |1+
+      gnSessionID is int 
+      
+     type : 720896
+  procedures :
+   -
+     name : ManageContactModif_PC_Outlook
+     internal_properties : CAAAAAgAAAD33dHv0c15bcYajqGz+Y6e5i6wLpqotm+8vXu2nuMBl0xz75/tz13qdVwLut28inzpnCzDeEBfWHonvzAuy2SRmuwog6Og3xc+bT/IzSTGyuk4/9owwPr5oBeq9Si+BQ8jVYTx5jbmBbqFxRUP1BGimZus8pfUS1kAe2xWy8NGdUY+iHkkSnrBvUMX7zn6e9sW5rvya4DWdvQTWhAT46LDgQ17b3w1vm44S3v0hn8g1mlwj4s7Mt/bs+mRNOVJNUuDB/yyo3I+6U5ObSTeB7uYKCB3d/xLgLKo13wJI9cy7veVGRaAjqKGVBC5G+C7+z5TDZOFdnvlHzNOPJPoNfd6
+     procedure_id : 1354898775636374774
+     type_code : 15
+     code : |1-
+      // Summary: Procedure that manages the modifications of a contact between the application and Outlook on the PC (if any)
+      // Syntax:
+      //ManageContactModif_PC_Outlook ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      
+      Procedure PRIVATE ManageContactModif_PC_Outlook()
+      
+      sListDiff is string	// List of differences between the contact of PC and the contact of Outlook
+      
+      // Checks whether the contact is identical on the PC and on Outlook
+      // if some modifications have been made: list them and ask the user whether he wants to update the application database or Outlook
+      IF bIsDifferentOutlookAndApp(sListDiff) = True THEN
+      	
+      	//1: Keep the values of Outlook
+      	//2: Keeps the values of the application
+      	//3: No action
+      	SWITCH Dialog(<§?18496C7F054CAB6A§>,  Contact.LastName + " " + Contact.FirstName, sListDiff)
+      		
+      		// Keep the values of Outlook
+      		CASE 1 :
+      			// Deletes the contact from the application
+      			HDelete(Contact)						
+      			// Adds the contact found in Outlook into the database of the application
+      			CopyContactToApp()
+      			
+      		// Keep the values of PC
+      		CASE 2 :
+      			// Deletes the contact from Outlook
+      			ContactDelete(gnSessionID)
+      			// Adds the contact found in the application into Outlook
+      			CopyContactToOutlook()
+      			
+      		//No action
+      		CASE 3 :
+      			
+      	END
+      	
+      END
+     type : 458752
+   -
+     name : bIsDifferentOutlookAndApp
+     internal_properties : CAAAAAgAAAD6SQL64tc0I86kPG4N1gDSl2Uvrky5jPF91gSdibcf7g/d5XgZ0V1Cs++UYiBN1izmwUKmpnY+T9kwOY/RWSpL1HyBPRIS2Y2V75XEVhhnX/C2DADKGuotlm7gwsnHriqc2mn5EIs+kRsayf1JNmEUJ1ib8p5bEaZNrVMTSguzQmG9p3Yzrn5HQNttB0r8s8zj/p8V3YB9MB6Iqz00IdCnJMCOiswKNHcWIQ/rIC7TWG/DiSIK0WDDL4R2/MiYjvxNk8dQIKkDuojyX7zQyzhUvIQ5ede5Rbhuy6p+qSpgSblvZn+jdmsAABtyu2T2Se1uT+H+FRfY2EXp/+24XJeVhbWX+7eZ5qq+FM/oQn4mZChEMhqmB3dFuFVNItUbEl+5An7ZLuZ9ueHVdOP3dYuaYDLv59ivIAuDsFiRoYwHsmuVWQ==
+     procedure_id : 1354898775636440310
+     type_code : 15
+     code : |1-
+      // Summary: Checks the differences of a contact between its version in the application and its version in Outlook on PC
+      // Syntax:
+      //[ <Result> = ] bIsDifferentOutlookAndApp (<sList>)
+      //
+      // Parameters:
+      //	sList: Return parameter containing the list of differences if they exist
+      // Return value:
+      // 	boolean: TRUE if differences exist, FALSE otherwise
+      //
+      
+      Procedure PRIVATE bIsDifferentOutlookAndApp(sList)
+      
+      //Local variables
+      dtDate 					is datetime	
+      dDate 					is date
+      sListDifferences 		is string
+      sPCDateDisplayed 		is string	// String displaying a date of the local database
+      sOutlookDateDisplayed 	is string	// String displaying a date of Outlook
+      
+      // Name
+      IF (Contact.LastName 				<> mContact.Name) THEN 
+      	sListDifferences += StringBuild("PC Name: %1, Outlook Name: %2",Contact.LastName, mContact.Name) + CR
+      END
+      
+      // First name
+      IF (Contact.FirstName				<> mContact.FirstName) THEN 
+      	sListDifferences += StringBuild("PC First Name: %1, Outlook First Name: %2",Contact.FirstName, mContact.FirstName) + CR
+      END
+      
+      // FirstName2
+      IF (Contact.FirstName2				<> mContact.FirstName2) THEN 
+      	sListDifferences += StringBuild("PC First Name2: %1, Outlook First Name2: %2",Contact.FirstName2, mContact.FirstName2) + CR
+      END
+      
+      // Address
+      IF (Contact.Address 			<> mContact.HomeAddress) THEN 
+      	sListDifferences += StringBuild("PC Address: %1, Outlook Address: %2",Contact.Address, mContact.HomeAddress) + CR
+      END
+      
+      // ZipCode
+      IF (Contact.ZipCode			<> mContact.HomeZipCode) THEN 
+      	sListDifferences += StringBuild("PC Zip Code: %1, Outlook Zip Code: %2",Contact.ZipCode, mContact.HomeZipCode) + CR
+      END
+      
+      // City
+      IF (Contact.City				<> mContact.HomeCity) THEN 
+      	sListDifferences += StringBuild("PC City: %1, Outlook City: %2",Contact.City, mContact.HomeCity) + CR
+      END
+      
+      // State - Department
+      IF (Contact.Rpt_State_dep				<> mContact.HomeState) THEN 
+      	sListDifferences += StringBuild("PC State: %1, Outlook State: %2",Contact.Rpt_State_dep, mContact.HomeState) + CR
+      END
+      
+      // Country
+      IF (Contact.Country				<> mContact.HomeCountry) THEN 
+      	sListDifferences += StringBuild("PC Country: %1, Outlook Country: %2",Contact.Country, mContact.HomeCountry) + CR
+      END
+      
+      // Phone
+      IF (Contact.Phone			<> mContact.HomePhone) THEN 
+      	sListDifferences += StringBuild("PC Phone: %1, Outlook Phone: %2",Contact.Phone, mContact.HomePhone) + CR
+      END
+      
+      // Mobile
+      IF (Contact.Cell				<> mContact.MobilePhone) THEN 
+      	sListDifferences += StringBuild("PC Cell Phone: %1, Outlook Cell Phone: %2",Contact.Cell, mContact.MobilePhone) + CR
+      END
+      
+      // Email
+      IF (Contact.Email				<> mContact.Email) THEN 
+      	sListDifferences += StringBuild("PC Email: %1, Outlook Email: %2",Contact.Email, mContact.Email) + CR
+      END
+      
+      // Date of Birth
+      IF Contact.DateOfBirth <> "" AND (Contact.DateOfBirth <> mContact.Birthday) THEN
+      	// Retrieves the birthday date
+      	dtDate 	= mContact.Birthday
+      	// Date of Outlook
+      	dDate = dtDate..Date
+      	IF DateValid(dDate) THEN
+      		sOutlookDateDisplayed = DateToString(dtDate..Date, maskSystemDate)
+      	ELSE
+      		sOutlookDateDisplayed = ""
+      	END
+      	// Date of PC
+      	sPCDateDisplayed 	= DateToString(Contact.DateOfBirth, maskSystemDate)
+      	sListDifferences += StringBuild("PC DateOfBirth: %1, Outlook DateOfBirth: %2" , sPCDateDisplayed , sOutlookDateDisplayed) + CR
+      END
+      
+      // Date of Saint's Day
+      IF Contact.SaintsDay <> "" AND (Contact.SaintsDay <> mContact.Anniversary) THEN 
+      	// Retrieves the date of Saint's Day
+      	dtDate 	= mContact.Anniversary
+      	// Date of Outlook
+      	dDate = dtDate..Date
+      	IF DateValid(dDate) THEN
+      		sOutlookDateDisplayed = DateToString(dtDate..Date, maskSystemDate)
+      	ELSE
+      		sOutlookDateDisplayed = ""
+      	END
+      	// Date of PC
+      	sPCDateDisplayed 	= DateToString(Contact.SaintsDay, maskSystemDate)
+      	sListDifferences += StringBuild("PC SaintsDay: %1, Outlook SaintsDay: %2" , sPCDateDisplayed , sOutlookDateDisplayed) + CR
+      END
+      
+      // Notes
+      IF (Contact.Notes				<> mContact.Notes) THEN 
+      	sListDifferences += StringBuild("PC Notes: %1, Outlook Notes: %2",Contact.Notes, mContact.Notes) + CR
+      END
+      
+      // Specify the list of differences
+      sList = sListDifferences
+      
+      // Were differences found?
+      IF NOT sListDifferences~="" THEN RESULT True
+      
+      // They are identical by default
+      RESULT False
+     type : 458752
+   -
+     name : CopyContactToApp
+     internal_properties : CAAAAAgAAACgrIN+k3tOEtvNUD5sRPBvBBbK95SLcpyB/NrJ/JApVSGFK6Alzv3+c7shm6RtWwF4m2bpnilFVdTaTfjuGTJLYihFhaM2GFfP4QIod8DtC5EvMnXbQRTalZf+ZuAjkb1mjkJLmnhA3mM3lsfNgT3jT9u2cu7a3Xfbu7mT+4wUvixXTD0KfXK9eeq70VI8gCY+Okx1uuQz
+     procedure_id : 1354898775636505846
+     type_code : 15
+     code : |1-
+      // Summary: Copies a contact found in Outlook on PC to the application
+      // Syntax:
+      //CopyContactToApp ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      // Automatic process of errors:   display the error, then retry, ignore of exit the application
+      //
+      
+      Procedure PRIVATE CopyContactToApp()
+      
+      // Specify the structure of the application					
+      IF OutlookToLocal() = False THEN
+      	RETURN		 
+      END
+      
+      // Addition into the database of the application
+      HAdd(Contact)
+      
+      // Positions the local ID in the notes for the synchronization
+      Contact.Notes = sPositionIdentifier(Contact.ContactID, mContact.Notes)
+      HModify(Contact)
+      
+      // Updates the notes of the contact with the identification
+      mContact.Notes = Contact.Notes
+      ContactModify(gnSessionID)
+     type : 458752
+   -
+     name : CopyContactToOutlook
+     internal_properties : CAAAAAgAAADJwkw50eQFbrKPH4YatLX3QGEx+Mz8AZOp++45lXA4eKmX5B4g6DSPzBsoHeTX37TZoWXYAI8CZDkS1IIRLrntABLoEUYgAAcBSmURHOHdfVAtvq/6TEleo1kggBU9ynwpt4xksORxhNbQZnNgAxWA0BLKe75Qeo/U2BMNRK6QzZ/SRCxNL6M1T/07uQbyYZuLGI3Q3ElC/Mkd+3DrNxZV71iPgA7FLfz/cpyBKE22UobhXsOOYS/UO2POCyku4v3OVg==
+     procedure_id : 1354898775636571382
+     type_code : 15
+     code : |1+
+      // Summary: Copies a contact found in the application to Outlook on PC
+      // Syntax:
+      //CopyContactToOutlook ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      // Automatic process of errors:   display the error, then retry, ignore of exit the application
+      //
+      
+      Procedure PRIVATE CopyContactToOutlook()
+      
+      // Specify the Outlook structure
+      LocalToOutlook()	
+      
+      // Add to the Outlook database
+      ContactAdd(gnSessionID)
+      
+      // Positions the local ID in the notes for the synchronization
+      Contact.Notes = sPositionIdentifier(Contact.ContactID, Contact.Notes)
+      // Indicates that the contact was transferred to Outlook
+      Contact.TransferredToOutlook = True
+      HModify(Contact)
+      
+      // Updates the notes of the contact with the identification
+      mContact.Notes = Contact.Notes
+      ContactModify(gnSessionID)
+      
+     type : 458752
+   -
+     name : OutlookToLocal
+     internal_properties : CAAAAAgAAAA6Vf8BSGDB+MxM/eP6KvWeBVx9NwAie3EwHq2J2SYImsTcdNjMpu4VXE08UfJxIxXHeCC6pErp5PZvzJYWRPJOjUQNUfok7hpD8Ep1oeK3fTw+p1o1yXzvToHnPF89z4qy9acKNHQks7S1/XVaBTpLTrDfsy52RYbsJ7uuzeL+G/xCEZLcCD+GTbCvbIXyLODcoYoiit92AiFWIOhPM6lFNCy3QA==
+     procedure_id : 1354898775636636918
+     type_code : 15
+     code : |1-
+      // Summary: Fills the structure of a contact found in the application with the data of the contact found in Outlook on PC
+      // Syntax:
+      //[ <Result> = ] OutlookToLocal ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	boolean: False if the contact cannot be added
+      //
+      
+      Procedure PRIVATE OutlookToLocal()
+      
+      //Resets the items for the Contact to 0, for a possible creation
+      HReset(Contact)
+      
+      //If the name or the company of the contact has not been specified, do not synchronize the contact
+      IF mContact.Name = "" AND mContact.Company = "" THEN
+      	RESULT False
+      END
+      
+      //Assign the items of the contact with the information of the contact found in Outlook on PC
+      Contact.LastName 				= mContact.Name			
+      Contact.FirstName 				= mContact.FirstName			
+      Contact.FirstName2 			= mContact.FirstName2			
+      Contact.Address 			= mContact.HomeAddress
+      Contact.ZipCode			= mContact.HomeZipCode
+      Contact.City				= mContact.HomeCity
+      Contact.Rpt_State_dep			= mContact.HomeState
+      Contact.Country				= mContact.HomeCountry
+      Contact.Phone			= mContact.HomePhone
+      Contact.Cell				= mContact.MobilePhone
+      Contact.Email				= mContact.Email
+      Contact.DateOfBirth		= mContact.Birthday
+      Contact.SaintsDay			= mContact.Anniversary
+      Contact.Notes				= mContact.Notes
+      
+      RESULT True
+     type : 458752
+   -
+     name : LocalToOutlook
+     internal_properties : CAAAAAgAAAAH9Z3WC4edbP8zdcOfnk6o2XwWODs8hLtU0ngzV/wsLAP9SoYrum2SeYXGtBD00SjcPHAsA1EDT0C8ifmF06WO8WRiuEJE3TxUawAQx6CB2WfqZ0hKkRtZrKhy4/cOM7tUOSBbDpPuOVRw+nb2zrb6Fp7UpgZt5fraLnCdKzVOJix5m9lkZg9H0F/5in2tlChy/HP7cFWaQOLQwSo8N2gR2LpgmZcPNzgsC00AHHI2FcNY9A==
+     procedure_id : 1354898775636702454
+     type_code : 15
+     code : |1+
+      // Summary: Fills the structure of a contact found in Outlook with the data of the contact found in the application
+      // Syntax:
+      //LocalToOutlook ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      
+      Procedure PRIVATE LocalToOutlook()
+      
+      //Resets to 0 the members of the Contact structure of Outlook PC
+      ContactReset()
+      
+      //Assign the members of the Contact structure found in Outlook on PC with the data of the contact found in the application
+      mContact.Name 				= Contact.LastName
+      mContact.FirstName				= Contact.FirstName
+      mContact.FirstName2			= Contact.FirstName2
+      mContact.HomeAddress	= Contact.Address
+      mContact.HomeZipCode	= Contact.ZipCode
+      mContact.HomeCity		= Contact.City
+      mContact.HomeState		=  Contact.Rpt_State_dep
+      mContact.HomeCountry		=  Contact.Country
+      mContact.HomePhone	= Contact.Phone
+      mContact.MobilePhone	= Contact.Cell
+      mContact.Email				= Contact.Email
+      // Check the dates of birth and the saint's days
+      IF Contact.DateOfBirth = "" THEN 
+      	mContact.Birthday	= "" 
+      ELSE	
+      	mContact.Birthday	= Contact.DateOfBirth+"000000"
+      END
+      IF Contact.SaintsDay = "" THEN
+      	mContact.Anniversary	= ""		
+      ELSE
+      	mContact.Anniversary		= Contact.SaintsDay+"000000"
+      END
+      mContact.Notes				= Contact.Notes
+     type : 458752
+   -
+     name : ManageInexistingContactOutlook
+     internal_properties : CAAAAAgAAABzVi7bl7UF81B4lq2144e2xxOrhTT1EgHJsgNu5FQZ00AAE2zDOwSC/nGquPNke4afvyMRDS4jCWQGXK9UqSzRtOf7K22ptMZ2GDPR47XVpu48bkTE3ox64rBfozLuEWKHM/K/zL5lDOu3ZjBIHwcHLVsO3BEOfCRILik1rbMoQgTXOv7c7UDLBrtKZuw0368Dpvp4PFmmHN/V/+k+X4Qxg4/epcyOqqL0ccyS/t3XjmgXrP7tTZ3FMLw3MEU1ksOSdjVUb0FbgEphbvIf0f/np3b28ICozaLoZcv+Zg==
+     procedure_id : 1354898775636767990
+     type_code : 15
+     code : |1-
+      // Summary: Procedure that manages the case when the contact does not exist in Outlook on PC
+      // Syntax:
+      //ManageInexistingContactOutlook ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      Procedure PRIVATE ManageInexistingContactOutlook()
+      
+      // The contact was already transferred to Outlook beforehand, so it has been deleted
+      IF Contact.TransferredToOutlook THEN
+      	
+      	// 1: Delete the contact from the PC 
+      	// 2: Restore the contact in Outlook
+      	// 3: No action
+      	SWITCH Dialog(<§?184971AB067BE002§>, Contact.LastName)
+      
+      		// Delete the contact from the PC 
+      		CASE 1 :
+      			// Delete the contact from the local database
+      			HDelete(Contact)
+      			
+      		// Restore the contact in Outlook
+      		CASE 2 :
+      			// Adds the contact into the Outlook database
+      			CopyContactToOutlook()
+      			
+      		// No action
+      		CASE 3 :
+      		
+      	END
+      	
+      ELSE 
+      	
+      	// The contact was never transferred to Outlook: add it 
+      	CopyContactToOutlook()	
+      	
+      END			
+     type : 458752
+   -
+     name : SynchronizeOutlookToApp
+     internal_properties : CAAAAAgAAADXsyQwovDYcfxuUWU6rH+PcIIZNKqNuOc4vRlVgbJ6+d9tCLiLUCD+Jooy3kQCu+WRqlfhLlPBPKnV/fMOe0YfFOQZDwfMLX5h2FrCKHsyB5iqVA0isKAiNeHqBKvly45yz+9A0NceTEk2xOgM5ssWeqQUegY9nRD8kWwflC90qfS/4wHw0QeGAwtn5JbMJNcxvIC6W5phFMU+emEbXm54TxPzGqGEqqASoAL7261HmVgV/beD1znBYPV6ncbmxx/IWRDTIlvu0lrYVA==
+     procedure_id : 1354898775636833526
+     type_code : 15
+     code : |1-
+      // Summary: Synchronizes the contacts found in Outlook on PC to the application
+      // Syntax:
+      //SynchronizeOutlookToApp ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      // Automatic process of errors: RESULT 
+      //
+      // Automatic process of exceptions:   run CASE EXCEPTION:
+      //
+      
+      Procedure PRIVATE SynchronizeOutlookToApp()
+      
+      nIdContact is int	// Identifier of the contact
+      
+      // Browse the database of contacts of Outlook
+      ContactFirst(gnSessionID)
+      
+      WHILE mContact.Out = False
+      	
+      	// Retrieves the identifier of the contact (if it exists)
+      	nIdContact = nGetIdentifier(mContact.Notes)
+      	
+      	// If an identifier was found
+      	IF nIdContact <> -1 THEN
+      		
+      		// Searches for the existence of the contact in the local database
+      		HReadSeekFirst(Contact, ContactID, nIdContact)
+      		
+      		// If the contact exists: it was already synchronized during the previous step => don't manage the case here
+      		IF HFound(Contact) = False THEN
+      			
+      			// The contact does not exist anymore
+      			//1: Delete the contact from Outlook
+      			//2: Restore the contact on the PC 
+      			//3: No action
+      			SWITCH Dialog(<§?1849742A074AA034§>, mContact.Name)
+      			
+      				// Delete the contact from Outlook
+      				CASE 1 :
+      					ContactDelete(gnSessionID)
+      					
+      				// Restore the contact in the application
+      				CASE 2 :
+      					// Re-creates the contact in the database of the application
+      					CopyContactToApp()
+      					
+      				// 	No action
+      				CASE 3 :
+      					
+      			END
+      		END
+      		
+      	ELSE
+      		
+      		// Adds the new contact into the database of the application
+      		CopyContactToApp()
+      		
+      	END
+      	
+      	// Read the next contact
+      	ContactNext(gnSessionID)
+      END
+      
+      CASE EXCEPTION:
+      Error("Error while synchronizing the contacts between Outlook and the application."+ CR + ExceptionInfo())
+      RETURN
+     type : 458752
+   -
+     name : nGetIdentifier
+     internal_properties : CAAAAAgAAADa9Z+jsLQxuOTkxWsOksFqFXRhihDaF+26qLE3ExjmiCpGFoyUXnoZTqcgX/gHebst6mL21Hq98MwlnPBwooxw874D+bbYMiKNElofO6CZ/748ahl2OO9oV6qSe5TorNVh1JYdIUf7kFF6OGRPOBOyWYv27jvxzAdtoBoxFqkzzrvBXIEtf6qrZvH2L04BuTOyFxR8CNlgJCcY4to16fNj1ExXIA==
+     procedure_id : 1354898775636899062
+     type_code : 15
+     code : |1-
+      // Summary: Retrieves the identifier of the contact in the Notes of the Outlook contact on Pocket PC or on PC
+      // Syntax:
+      //[ <Result> = ] nGetIdentifier (<sNoteString>)
+      //
+      // Parameters:
+      //	sNoteString: Text of the Notes for the Outlook contact
+      // Return value:
+      // 	integer: Identifier if it was found, -1 otherwise
+      //
+      
+      Procedure PRIVATE nGetIdentifier(sNoteString)
+      
+      nTAGPosition	is int	// position of the identification TAG in the text
+      nStartPosition	is int	// position of the beginning of the identifier in the text
+      nEndPosition	is int	// position of the end of the identifier in the text
+      nTAGIdentifier	is int	// identifier of TAG
+      
+      // The TAG containing the identifier has the following format: <idInternalDatabase:IdNumber>
+      // Retrieves the position of the identification TAG in the text
+      nTAGPosition = Position(sNoteString , "<idInternalDatabase:" , 1 , FromBeginning)
+      
+      // If this TAG exists
+      IF nTAGPosition <> 0 THEN
+      	
+      	// Retrieves the position of the beginning of the identifier
+      	nStartPosition	= Position(sNoteString , ":" , nTAGPosition , FromBeginning) + 1
+      	// Retrieves the position of the end of the identifier
+      	nEndPosition	= Position(sNoteString , ">" ,nStartPosition , FromBeginning)
+      	// Retrieves the value of the identifier
+      	nTAGIdentifier = Val( sNoteString[[ nStartPosition TO nEndPosition-1 ]])
+      	// Returns the identifier found
+      	RESULT nTAGIdentifier	
+      	
+      END
+      
+      // The identifier was not found, returns -1
+      RESULT -1
+     type : 458752
+   -
+     name : sPositionIdentifier
+     internal_properties : CAAAAAgAAAD6lb9CUBwtdH7O+cmkLLvkHwpPt7A6dw16aNFXE1jGSMpm9iz0/hr5zifA/7gHGTsNSsKWNBodUMwlvFCwYuxwUx7jmVY4EkKNEvo/O2B5P17cuqmGqF8Y51riCwRYHGURpOatMXcrgCEqiPT/qMPCSZuGPosh/De9kKqBRlnjXqvRrBG97xobdmFG/z5xqQPn9BVpc4Yhp2oXd6vAvpqE9Gx3AA==
+     procedure_id : 1354898775636964598
+     type_code : 15
+     code : |1-
+      // Summary: Creates the identification TAG in the notes of an Outlook contact on Pocket PC or on PC
+      // Syntax:
+      //[ <Result> = ] sPositionIdentifier (<nIdentifier>, <sNewNotes>)
+      //
+      // Parameters:
+      //	nIdentifier: identifier of the contact in the local database, to include in TAG
+      // 	sNewNotes: <specify the role of sNewNotes>
+      // 	sNewNotes: <specify the role of sNewNotes>
+      // 	sNewNotes: Notes of the contact
+      // Return value:
+      // 	Undefined type: new value for the notes of the Outlook contact
+      //
+      
+      Procedure PRIVATE sPositionIdentifier(nIdentifier, sNewNotes)
+      
+      nTAGPosition	is int	// position of the identification TAG in the text
+      nStartPosition	is int	// position of the beginning of the identifier in the text
+      nEndPosition	is int	// position of the end of the identifier in the text
+       
+      // The TAG containing the identifier has the following format: <idInternalDatabase:IdNumber>
+      // Retrieves the position of the identification TAG in the text
+      nTAGPosition = Position(sNewNotes, "<idInternalDatabase:" , 1 , FromBeginning)
+      
+      // If this TAG exists
+      IF nTAGPosition <> 0 THEN
+      	
+      	// Retrieves the position of the end of TAG
+      	nEndPosition	= Position(sNewNotes , ">" ,nStartPosition , FromBeginning)+1
+      	// Deletes the identification TAG (found at the beginning of the notes)
+      	sNewNotes = Right(sNewNotes , Length(sNewNotes)-nEndPosition)
+      	
+      END
+      // Positions the new identification TAG in the text of the notes
+      sNewNotes = "<idInternalDatabase:"+nIdentifier+">" + CR + sNewNotes	
+      
+      // Returns the new value of the notes
+      RESULT sNewNotes
+     type : 458752
+   -
+     name : SynchronizeOutlookContacts
+     internal_properties : CAAAAAgAAAAmMAoP1woFAt8QeRvAt2qRXKKTojTSksjrbZnsliZq/wXGvFZLleojLm/YPH3XPFzt2wQruvCoLC/hJRs3cHjPUcvTGkmIOu/EII7heRGPWObAnL7vMmZZ5ybtUq3H2icQX7pHMRWluQfr/Dxta88z/ZAtxuUUGmzKcxzN1iQVX24W+wQ6TAW+wTPc13dlEI501vDBKdR3Tm5BmVz/9hfi2WrnQyRAstAiTH0UxdDKEaPZOunIj4iyyJ8G6ys2tBmiV/hyx3VhWyYR0+krT0PQaK18sXU=
+     procedure_id : 1354898775637030134
+     type_code : 15
+     code : |1-
+      // Summary: Synchronizes the contacts between the application and Outlook on the PC
+      // Syntax:
+      //SynchronizeOutlookContacts ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      
+      Procedure restricted SynchronizeOutlookContacts()
+      
+      //Start an Outlook session
+      gnSessionID = OutlookStartSession("")
+      
+      fCurrentDir(CompleteDir(fExeDir()))
+      
+      IF gnSessionID = 0 THEN
+      	Error("Unable to access the data found in the Outlook messaging. This example operates with Microsoft Outlook but not with Outlook Express.") 
+      	RETURN
+      END
+      
+      //Displays an hourglass
+      HourGlass(True)
+      
+      //Synchronizes the contacts found in the application to Outlook
+      SynchronizeAppToOutlook()
+      
+      //Synchronizes the contacts found in Outlook to the application
+      SynchronizeOutlookToApp()
+      
+      //Stops the display of the hourglass
+      HourGlass(False)
+      
+      //Informs the user of the end of the Outlook/PC synchronization
+      Info("The contacts have been synchronized.")
+     type : 458752
+   -
+     name : SynchronizeAppToOutlook
+     internal_properties : CAAAAAgAAAAc2u8/6fD48RMACWz6Fhn6joIiqNQouUbgJTEUPQlX8xBpRawm1+ayNVKKFFtp+0ICRnBCZ0fYP36Puli+cpFMxdl/agFP0ZpFbbHB576lemeIdyVKtwT+xFn/bOlmrjjHk0OtrncbH8wWkbH5HA1jfVi10B7zvu4IhLPsKj/7uToYlSgd49+cK+rdRMfqZCaMrWdgL04mgV29s2j6wr7XSHzNd7AkEbgCC1Bp6Bm+VZ2NrNE/GCoGDRl4xAaR6w==
+     procedure_id : 1354898775637095670
+     type_code : 15
+     code : |1+
+      // Summary: Synchronizes the contacts found in the application to Outlook on PC
+      // Syntax:
+      //SynchronizeAppToOutlook ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      
+      Procedure PRIVATE SynchronizeAppToOutlook()
+      
+      //Browse the local database
+      FOR EACH Contact 
+      	
+      	//Checks whether the contact exists in Outlook
+      	IF bSearchOutlookContact(Contact.ContactID) = True THEN
+      		
+      		//If he exists in Outlook, manage the modifications of the contact between the data base of the application and Outlook
+      		ManageContactModif_PC_Outlook()
+      	
+      	ELSE
+      		
+      		//The contact does not exist in Outlook: manage this case 
+      		ManageInexistingContactOutlook()
+      		
+      	END
+      END
+      
+     type : 458752
+   -
+     name : bSearchOutlookContact
+     internal_properties : CAAAAAgAAAC+f6VfjFI3qwPeDC4nGuO1YcVAUJsTSp1FqfTxG3Gr0v3a+2EI34PnIpvElCIsTS13zFNTrZZc+Z8TE+KBOkv8J/LKK6bu+u61gGWfUy1nYgPjqZAab4Ged81zeg7n+P6x0lP0V1ix2sHjURtLdx/ppxunt+d46sFN0a2SGN7XLcGhoQZRTBh1WoDHMgY03xqPcvYO19nLTbpAQqQYn6MUKXH9
+     procedure_id : 1354898775637161206
+     type_code : 15
+     code : |1-
+      // Summary: Searches for the existence of the identifier passed in parameter among the contacts of Outlook on PC
+      // Syntax:
+      //[ <Result> = ] bSearchOutlookContact (<nIdentifier>)
+      //
+      // Parameters:
+      //	nIdentifier: identifier to search
+      // Return value:
+      // 	boolean: True if the identifier was found, False otherwise
+      //
+      
+      Procedure PRIVATE bSearchOutlookContact(nIdentifier)
+      
+      // Browse the contacts of Outlook
+      ContactFirst(gnSessionID)
+      
+      WHILE mContact.Out = False
+      	
+      	// If the identifier corresponds
+      	IF nGetIdentifier(mContact.Notes) = nIdentifier THEN
+      		// The identifier was found
+      		RESULT True
+      	END
+      	
+      	ContactNext(gnSessionID)
+      END
+      
+      // The identifier was not found
+      RESULT False
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_Collection1
+resources :
+ string_res :
+  identifier : 0x1849627604617887
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+ dialogs :
+  -
+    identifier : 0x18496c7f054cab6a
+    internal_properties : CAAAAAgAAAA9SBiBNRj6LRp0eUb879IXCRLpNp5LLvHaSC5MCC4jiD2oujY2u8yJtmSq1vjmhvQ8JNKdeMPqHzngmxiavECnbNC2qo4=
+    label :
+     fr-FR : "Les informations du contact '%1' différent entre l'application et Outlook.\r\n\r\nListe des différences :\r\n%2\r\n\r\nQue souhaitez-vous faire ?"
+     en-GB : "The details of '%1' contact differ between the application and Outlook.\r\n\r\nList of differences:\r\n%2\r\n\r\nWhat do you want to do?"
+    image : {}
+    cancel_button : 2
+    buttons :
+     -
+       label :
+        fr-FR : Conserver les valeurs de Outlook
+        en-GB : Keep the values of Outlook
+       image : {}
+       value : 1
+     -
+       label :
+        fr-FR : Conserver les valeurs de l'application
+        en-GB : Keep the values of the application
+       image : {}
+       value : 2
+     -
+       label :
+        fr-FR : Ne rien faire
+        en-GB : No action
+       image : {}
+       value : 3
+  -
+    identifier : 0x184971ab067be002
+    internal_properties : CAAAAAgAAADteEhRZSjqPWpkCVbMvwIn+cIZxs4bXsHaKA5sCG4DKL0oKkZGy1wZBlQ65ugW1kTsVIJtqJO6b0nwqwiKrFC3HABmer4=
+    label :
+     fr-FR : "Le contact '%1' a été supprimé de la liste des contacts de Outlook.\r\n\r\nQue souhaitez-vous faire ?"
+     en-GB : "The '%1' contact was deleted from the list of contacts of Outlook.\r\n\r\nWhat do you want to do?"
+    image : {}
+    cancel_button : 2
+    buttons :
+     -
+       label :
+        fr-FR : Supprimer le contact du PC
+        en-GB : Delete the contact from the PC
+       image : {}
+       value : 1
+     -
+       label :
+        fr-FR : Restaurer le contact dans Outlook
+        en-GB : Restore the contact in Outlook
+       image : {}
+       value : 2
+     -
+       label :
+        fr-FR : Ne rien faire
+        en-GB : No action
+       image : {}
+       value : 3
+  -
+    identifier : 0x1849742a074aa034
+    internal_properties : CAAAAAgAAABh/DQXeQiOjdaUler4O8ZzJeq5SlqLasmG4GLghJKPXAFIdFD02f6nqPYoSG6cSDb+bvwnLknkDSNqAXLQUiKRRjTi/jo=
+    label :
+     fr-FR : "Le contact '%1' a été supprimé de la liste des contacts de l'application.\r\n\r\nQue souhaitez-vous faire ?\r\n"
+     en-GB : "The '%1' contact was deleted from the list of contacts of the application.\r\n\r\nWhat do you want to do?\r\n"
+    image : {}
+    cancel_button : 2
+    buttons :
+     -
+       label :
+        fr-FR : Supprimer le contact dans Outlook
+        en-GB : Delete the contact in Outlook
+       image : {}
+       value : 1
+     -
+       label :
+        fr-FR : "Restaurer le contact sur le PC "
+        en-GB : "Restore the contact on the PC "
+       image : {}
+       value : 2
+     -
+       label :
+        fr-FR : Ne rien faire
+        en-GB : No action
+       image : {}
+       value : 3
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

@@ -1,0 +1,296 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : WD Managing Contacts
+ major_version : 28
+ minor_version : 0
+ type : 4097
+ description : WD Managing Contacts
+ subtype : 0
+project :
+ identifier : 0x0
+ internal_properties : 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
+ configurations :
+  -
+    name : 32-bit executable
+    internal_properties : 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
+    configuration_id : 4409264267930914974
+    type : 1
+    generation_directory : .\Exe\32-bit executable
+    generation_name : WD Managing Contacts.exe
+    version :
+     version : VI190030C
+     autoincrement_version : false
+    icon_filename : .\contact.ico
+    language : 2
+    new_features_help :
+     name : ""
+     internal_properties : CAAAAAgAAADnszSuVQa32yM7n69tkquokymCNmro5xrdg1sBLmRzzZOKn7Z/8Kc+WxiTRRJoUn477zFkBKaAkuroZA==
+  -
+    name : 32-bit Linux
+    internal_properties : CAAAAAgAAAAeilWL41Qp70NXTGsj3G+ODf07rRRhn3SbAMRCysTmJehs12OPke0iCaKxmOariUd8ViLl6bt5kWP1zhufWwAYQK8Ds8q/FV9eq+FVu+STZ+BmgNDWAD4V1pgmgh2sKZ9O2K+fqbxroqjxbpxZ16FEvr/egpZ0MVSnb/dLRZFlUDU/fZcWeZ8ET3afBx6b9k7CEC3J9shmSsrnyNYmaESYaW4ZYdMaFMUmcmG5Oscazp6ZYvq84mwGSI95DxxIM7IvNvm5YP3YBi0prCfnqRyxaaaFbu073ArgNal0SBN2cGuJLJNY6lBs92rX+FN4gQbX3VMKhdbT3tB74Kp9jQXrWGFyv8na43wf+es/SFywbc0POkgYQxvkjwKSjT9bF0FxG9tGjgZwZgzAJZykljc3Tf1Fokm4huqkDZPsIFo2dN5hXhBlb9xYH+1Gdcu/wAlFLyhbnXIQmEs3qftEhCICjDbZfCcTiGtMnG3fzIKjcTb/VMtnEkDsisXdjxjEv4gegkskiJ3K/iNRy+spm3mSM3RqhXfdw1mSxTkRc7WZR3trSFz0YC8f+lG900ksoOUq84x9OKnW5IAWXG7QnInwqVRxx7PkjxvF3J4WuP8dt5g3fgcLU12sDQ0+Jcr+WwNZTZm76Ex2wiyPbbxauo8l97JXTEBvYQoMIbhKeruIXo2R3aUS/5lVSxePwxkjjI2rFu/jxQ2i2Dpst4SyVYwpNjhGgNYTY6ipsO3ic+1WF6Kbwy9/6ixCUlWxjozuXVwktP+rIOluViecupj2Sqv/oJN5FDUjWUOvxUS11mPyqOYDROwkVtoAX/UJ8beWR4g8Y7IxMtzreDnQ8ejr3Rnu9bnKGZofRV1GZ6m/1gJM+yUvddmFYKI/zYZ/8Bsym+lJgzpHwPof3sBGEGCCXR0pAjWSn9tj5ob53ltfp1tJ/YNfd4zq/EhIdl0b+siK1pibCQb9Z6g28AtKpkx4Ujeoi/uMyW1ia3mtHP5PAr8pYWBDVHsGwJfU/6X/ut1Xr8FRSYgDFvB47MJLL224n0w+gDvzxA==
+    configuration_id : 13086227128273086988
+    type : 9
+    description : Linux executable
+    generation_directory : .\Exe\32-bit Linux
+    generation_name : WD Managing Contacts
+    version :
+     version : VI190030C
+     autoincrement_version : false
+    language : 2
+    64bits : true
+ elements :
+  identifier : 0x4ac379b3004f14d0
+  elements :
+   -
+     name : WINTPL_Main
+     identifier : 0x4d653c7a001e9a4c
+     internal_properties : CAAAAAgAAABn409TUA0lxu/zeU7cJS5E8UwYGLpuOWS2FcO4LeAynhr2EIyfWdrkrGhSrnZqFopy8g==
+     physical_name : .\WINTPL_Main.wdt
+     type : 18
+   -
+     name : QRY_LastContactExchanges
+     identifier : 0x4d74e8600030a94f
+     internal_properties : CAAAAAgAAAAHA2+zcC2Fpo/T2S58RgKgvRpgsIUETXFCLj1U9Y2Jd3FD761/uTpEzEiyDpZKNqoSEg==
+     physical_name : .\QRY_LastContactExchanges.WDR
+     type : 5
+   -
+     name : WinDevMessageBox
+     identifier : 0x484e5543000156ae
+     internal_properties : CAAAAAgAAADqYNI29bL6JTgQBuuplGkLNBVzK5bYJqGjRx43Gf8di2W9U8lS7nUBibUviQnHsyXvdw==
+     physical_name : .\WinDevMessageBox.WDW
+     type : 2
+   -
+     name : TEST_WIN_Contacts
+     identifier : 0x4a08349c0000ca29
+     internal_properties : CAAAAAgAAACMiuQwD7T8LzYaHO2zh1eFKk3pyfBa2HVyIrKChGYu0nakRNhA+HsHg785hw/BuS+ZmQ==
+     physical_name : .\TEST_WIN_Contacts.wxt
+     type : 17
+   -
+     name : QRY_Search
+     identifier : 0x484cec9300006995
+     internal_properties : CAAAAAgAAABEwqyIN2xEZ05ilGU7QA+NpiulNQaNCmpKiF0854uBR41R27F4gAOPGwfxz1eJcWdR0Q==
+     physical_name : .\QRY_Search.WDR
+     type : 5
+   -
+     name : WIN_ConfigureEmail
+     identifier : 0x4848211300020cd0
+     internal_properties : CAAAAAgAAAAuNAYaqdZeEdQMQjd1UyW3/OPrc0wQlqhCrqR8XsrCBsYIBJiGsjG9daEb5a0j39E7Ow==
+     physical_name : .\WIN_ConfigureEmail.wdw
+     type : 2
+   -
+     name : ManageParameters
+     identifier : 0x4d5e7a580021a0e6
+     internal_properties : CAAAAAgAAABr51O3dDF5orufhWoo5+78tSSsNKo3Bt6Mfd9bg4qAQIBAzk7TbfaACDSuCopGMqZu9g==
+     physical_name : .\ManageParameters.wdg
+     type : 7
+     configurations :
+      -
+        configuration_id : 4409264267930914974
+        excluded : true
+   -
+     name : RPT_LabelsPhotoBarCodes
+     identifier : 0x484fa041000545df
+     internal_properties : CAAAAAgAAADrZ9M39LH5IjsfBeqomGpogYL87FumUaCjFw5K8Sf38d8tPc9T7XYAiLQuigrGsibudg==
+     physical_name : .\RPT_LabelsPhotoBarCodes.wde
+     type : 3
+     configurations :
+      -
+        configuration_id : 13086227128273086988
+        excluded : true
+   -
+     name : WIN_Contacts
+     identifier : 0x484cfef40000cdc6
+     internal_properties : CAAAAAgAAADSKAoerZqSTWBIjvOhYm1XlIHj61paaWJKTKdL8yX38d8jJdda5m15Me3XIeEf2803Pw==
+     physical_name : .\WIN_Contacts.wdw
+     type : 2
+   -
+     name : WIN_About
+     identifier : 0x484f965600018731
+     internal_properties : CAAAAAgAAABbNwMHpOHJ0uvPdXrYKj6kSdZsfLIhxeaCfq4UirllY613+4GjXebwuGReWtoW4tY+xg==
+     physical_name : .\WIN_About.WDW
+     type : 2
+   -
+     name : RPT_Labels
+     identifier : 0x484cf75100045ff5
+     internal_properties : CAAAAAgAAAAiGBoOverC3fDY3iNxVBGTXM1bc77OVy6gBNolib9dW6Vt46mKtj1JwX1nUdEP690nLw==
+     physical_name : .\RPT_Labels.wde
+     type : 3
+   -
+     name : WIN_Progbar
+     identifier : 0x4d6283da001ef8c7
+     internal_properties : CAAAAAgAAADxTSl9yve/8PXtL5CW6vAKH2hqWnZrBBa/sNqezCF1a0GfTz3lE5AaloJ8RMwE/OzUXA==
+     physical_name : .\WIN_Progbar.wdw
+     type : 2
+     configurations :
+      -
+        configuration_id : 13086227128273086988
+        excluded : true
+   -
+     name : WIN_SendEmail
+     identifier : 0x4848227600037b0d
+     internal_properties : CAAAAAgAAADgXtjE41jQi6K2OImPzBOJWg/pGbD0sQ+OH+19Sc9F29HNXy30DJcj7yuVYyPdpRvlbQ==
+     physical_name : .\WIN_SendEmail.wdw
+     type : 2
+   -
+     name : Synchronization_Outlook
+     identifier : 0x484962830004acd0
+     internal_properties : CAAAAAgAAACb90NHZCGJkquPNbqY/n5cqYYM/FcUqzCuEHji6y3hd0m7t0XjHaYw+CSeGppWIpZ+hg==
+     physical_name : .\Synchronization_Outlook.wdg
+     type : 7
+     configurations :
+      -
+        configuration_id : 13086227128273086988
+        excluded : true
+   -
+     name : WIN_ContactForm
+     identifier : 0x48480cdd00011d33
+     internal_properties : CAAAAAgAAADiWNrO/aoCHTAYHuOxmNHLHF1bk77iH4uK9IeFVdO5T6ERH+1K9n0Jgb0nkRHPqx3nbw==
+     physical_name : .\WIN_ContactForm.wdw
+     type : 2
+   -
+     name : WinDevDialogBox
+     identifier : 0x484e55440002594d
+     internal_properties : CAAAAAgAAACEguzI96wEJw4iVKX7C09FsvUxoS5ICWJTS8eOrmqqtjKooHy4QMPPW8cxjxfJsSeRkQ==
+     physical_name : .\WinDevDialogBox.WDW
+     type : 2
+   -
+     name : RPT_Contacts
+     identifier : 0x48495c48000254e1
+     internal_properties : CAAAAAgAAAC3k5+DIB0VFj8DST5sJZ4U4bwI6OEjPdxPDIviZKDyfnp28KyPqSq0fLginmaaZlqiog==
+     physical_name : .\RPT_Contacts.wde
+     type : 3
+   -
+     name : RPT_PhotoLabels
+     identifier : 0x484f9e3b00045e10
+     internal_properties : CAAAAAgAAAAVcX2hHnszbHFZW6zy3BCSSyiWzol8Zx9faJTCDQsLFe/hbS8JN7zGQv74wECwSLgAAA==
+     physical_name : .\RPT_PhotoLabels.wde
+     type : 3
+   -
+     name : COL_HFTest
+     identifier : 0x428202f9007c8344
+     internal_properties : CAAAAAgAAABAPrjkw7jwKwJWWKnvojedejshuQaq23NKLNcrxX2fqQPzeRMULLfDT8s1gwP9hXtFzQ==
+     physical_name : .\COL_HFTest.wdg
+     type : 7
+   -
+     name : TEST_COL_HFTest
+     identifier : 0x42820336007e6e8c
+     internal_properties : CAAAAAgAAABi2FpOfSqCnbCYnmMxHc3PaGtn/94KvDyO31X2nkRIiEySmnLKdv2JAT2nEZFPK51n7w==
+     physical_name : .\TEST_COL_HFTest.wxt
+     type : 17
+  other_elements :
+   -
+     physical_name : .\description.gif
+     configurations :
+      -
+        configuration_id : 13086227128273086988
+        excluded : true
+   -
+     physical_name : .\description.rtf
+     configurations :
+      -
+        configuration_id : 13086227128273086988
+        excluded : true
+   -
+     physical_name : .\default.png
+  analysis : .\WD Managing Contacts.ana\WD Managing Contacts.wda
+  net_assemblies : []
+  uwp_api : []
+  external_components : []
+  internal_components : []
+ report_and_queries_enabled : false
+ languages :
+  - en-GB
+ rad_options :
+  internal_properties : CAAAAAgAAACqfO8gYz6Jrs6YojBFXg1FMG/EhhYeXd8Kxs3SH/nrmqn+d2nt7W/xPCjvWOwnXQ==
+ code_elements :
+  internal_properties : CAAAAAgAAAAvwP/EMse8XSF243vx0mkYVlTNg5iVnsKqvgNOnk/YD0X14SQNmMlmcZ3EVvLu4LxtMw65muuzr56SHaiUfO5Z3CNYRz7xpK1H
+  type_code : 0
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAADqvf5rD0wq4Y1EJleq0Wd/H1cW4egMDyQ0hswXSYE/EueD+h2f1n7/95Y9fJ3U5PbkTsMPJCO034gXxtoSM99JqmTq1Jj52olFQet6cAzU9O+NDJxhJZa2u610SOTG9vPJBFnNpr3apFBMnURbJOqNmaYQkG9bWyxx92w18jyfAfx6
+     code : |1-
+      CONSTANT
+      	CST_STORE_EMAIL = "Email"
+      	CST_STORE_SMTP_SERVER = "SMTPServer"
+      	CST_STORE_PWD = "PWD"
+      	CST_ACKNOWLEDGMENT_RECEIPT = "AR"
+      	CST_READING_CONFIRMATION = "CU"
+      	CST_CONFIDENTIALITY = "Confidentiality"
+      	CST_PRIORITY = "Priority"
+      END
+      
+      gsConfigFile is string = CompleteDir(fExeDir()) + "config.ini" 
+      
+      
+      <SI CibleExécution=ApplicationWindows>
+      	
+      	//Initialize the management of the persistent values for the email address and the SMTP server: manage with a .ini
+      	InitParameter(paramIni, gsConfigFile)
+      	
+      <FIN>
+      
+      
+      
+      HCreation(Exchange)
+      gdDate is date
+      FOR EACH Contact 
+      	gdDate = "20110201"
+      	FOR i = 1 TO 20
+      		
+      		HReset(Exchange)
+      		Exchange.ContactID = Contact.ContactID
+      		Exchange.Date = gdDate
+      		Exchange.Type = modulo(i,3)+1
+      		SWITCH Exchange.Type 
+      			CASE 1 : Exchange.Notes="Incoming email about..."
+      			CASE 2 : Exchange.Notes="Phone conversation regarding..."
+      			CASE 3 : Exchange.Notes="SMS for confirming the reception of..."
+      			OTHER CASE
+      				
+      		END
+      		HAdd(Exchange)
+      		gdDate..Day += Random(1,2)
+      		
+      	END
+      	
+      END
+     type : 196608
+   -
+     code : |1-
+      
+     type : 196610
+   -
+     code : |1-
+      
+     type : 196619
+   -
+     type : 196621
+   -
+     type : 196627
+     enabled : false
+  orphans :
+   -
+     name : 32-bit executable
+     identifier : 0x4ac379b3005f15d9
+     code_elements :
+      type_code : 159
+      p_codes : []
+   -
+     name : 32-bit Linux
+     identifier : 0x4d5e75e7001845bc
+     code_elements :
+      type_code : 159
+      p_codes : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+rad :
+ internal_properties : CAAAAAgAAABhIL0UXeZmxDJxY3Xy0Q==
+project_explorer :
+ explorer_type : project
+resources :
+ string_res :
+  identifier : 0x0
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAAAd98VSJfHHqE3P0QHwrwdhn7ig8dWBR6valpUTgnAMTVXiDg==
